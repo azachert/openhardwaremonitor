@@ -1,0 +1,15 @@
+version: 0.7.2.{build}
+configuration: Release
+assembly_info:
+  patch: true
+  file: '**\Assembly*Info.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+build:
+  project: OpenHardwareMonitor.sln
+  verbosity: minimal
+after_build:
+- cmd: 7z a openhardwaremonitor-v%APPVEYOR_BUILD_VERSION%.zip ./Bin/Release/*
+artifacts:
+- path: openhardwaremonitor-v*.zip
